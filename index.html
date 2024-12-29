@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media and Entertainment Industry App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .button {
+      display: block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      border-radius: 5px;
+      text-align: center;
+      margin: 10px 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .slider {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .optionButton {
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .optionButton:hover {
+      background-color: #e0e0e0;
+    }
+
+    .returnButton {
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .returnButton:hover {
+      background-color: #45a049;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="app" class="container">
+  <!-- Login Page -->
+  <div id="loginPage">
+    <h2>Login</h2>
+    <input id="username" class="input" type="text" placeholder="Username">
+    <input id="password" class="input" type="password" placeholder="Password">
+    <button class="button" onclick="handleLogin()">Login</button>
+  </div>
+
+  <!-- Main Page -->
+  <div id="mainPage" style="display: none;">
+    <h2>Media and Entertainment Industry</h2>
+    <a href="#" class="button" onclick="showPage('coProduction')">Apply for Co-Production Certifications</a>
+    <a href="#" class="button" onclick="showPage('importQuota')">Select Import Quota Category</a>
+    <a href="#" class="button" onclick="showPage('taxIncentives')">Tax Slabs and Incentives</a>
+    <a href="#" class="button" onclick="showPage('testimonials')">Testimonials</a>
+    <a href="#" class="button" onclick="showPage('customerCare')">Customer Care</a>
+    <a href="#" class="button" onclick="showPage('faqs')">FAQs</a>
+    <a href="#" class="button" onclick="handleLogout()">Sign Out</a>
+  </div>
+
+  <!-- Co-Production Form -->
+  <div id="coProduction" style="display: none;">
+    <h2>Co-Production Certification Form</h2>
+    <input class="input" type="text" placeholder="Name">
+    <input class="input" type="text" placeholder="Government ID Proof">
+    <input class="input" type="text" placeholder="Role in Media Production">
+    <h3>Type of Media Co-Production</h3>
+    <div class="optionButton">News</div>
+    <div class="optionButton">Animations</div>
+    <div class="optionButton">Games</div>
+    <div class="optionButton">Movies</div>
+    <button class="button" onclick="alert('Application submitted successfully!')">Submit</button>
+    <button class="button" onclick="showPage('mainPage')">Back</button>
+  </div>
+
+  <!-- Import Quota Form -->
+  <div id="importQuota" style="display: none;">
+    <h2>Select Import Quota</h2>
+    <input type="range" class="slider" id="quotaSlider" min="1" max="15" value="1" onchange="updateQuota()">
+    <p>Quota: <span id="quotaValue">1%</span></p>
+    <button class="button" onclick="showPage('selectProject')">Next</button>
+    <button class="button" onclick="showPage('mainPage')">Back</button>
+  </div>
+
+  <!-- Select Project Page -->
+  <div id="selectProject" style="display: none;">
+    <h2>Choose a Project</h2>
+    <div class="optionButton" onclick="setProject('Project 1')">Project 1</div>
+    <div class="optionButton" onclick="setProject('Project 2')">Project 2</div>
+    <div class="optionButton" onclick="setProject('Project 3')">Project 3</div>
+    <button class="button" onclick="showPage('verification')">Submit</button>
+    <button class="button" onclick="showPage('importQuota')">Back</button>
+  </div>
+
+  <!-- Verification Page -->
+  <div id="verification" style="display: none;">
+    <h2>Sent for Verification</h2>
+    <p>Your import quota has been sent for verification with <span id="selectedProject"></span>.</p>
+    <button class="button" onclick="alert('Tracking progress...')">Track Progress</button>
+    <button class="returnButton" onclick="showPage('mainPage')">Return to Main Page</button>
+  </div>
+
+  <!-- Tax Incentives Page -->
+  <div id="taxIncentives" style="display: none;">
+    <h2>Tax Slabs and Incentives</h2>
+    <a href="#" class="button">News - Government Website</a>
+    <a href="#" class="button">Animations - Government Website</a>
+    <a href="#" class="button">Games - Government Website</a>
+    <a href="#" class="button">Movies - Government Website</a>
+    <button class="button" onclick="showPage('mainPage')">Back</button>
+  </div>
+
+  <!-- Testimonials Page -->
+  <div id="testimonials" style="display: none;">
+    <h2>Testimonials</h2>
+    <p>"This app is amazing!" - User A</p>
+    <p>"Very useful for the media industry!" - User B</p>
+    <button class="button" onclick="showPage('mainPage')">Back</button>
+  </div>
+
+  <!-- Customer Care Page -->
+  <div id="customerCare" style="display: none;">
+    <h2>Customer Care</h2>
+    <p>If you need assistance, please contact support@mediaapp.com.</p>
+    <button class="button" onclick="showPage('mainPage')">Back</button>
+  </div>
+
+  <!-- FAQs Page -->
+  <div id="faqs" style="display: none;">
+    <h2>FAQs</h2>
+    <p>Q: How do I apply for co-production?</p>
+    <p>A: Fill out the co-production certification form.</p>
+    <p>Q: How can I track my application?</p>
+    <p>A: Use the "Track Progress" button after submission.</p>
+    <button class="button" onclick="showPage('mainPage')">Back</button>
+  </div>
+</div>
+
+<script>
+  let selectedProject = '';
+  let quotaPercentage = 1;
+
+  function showPage(page) {
+    // Hide all pages
+    const pages = document.querySelectorAll('.container > div');
+    pages.forEach(page => page.style.display = 'none');
+
+    // Show selected page
+    document.getElementById(page).style.display = 'block';
+  }
+
+  function handleLogin() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username && password) {
+      showPage('mainPage');
+    } else {
+      alert('Please enter your username and password.');
+    }
+  }
+
+  function handleLogout() {
+    showPage('loginPage');
+  }
+
+  function updateQuota() {
+    quotaPercentage = document.getElementById('quotaSlider').value;
+    document.getElementById('quotaValue').innerText = `${quotaPercentage}%`;
+  }
+
+  function setProject(project) {
+    selectedProject = project;
+    document.getElementById('selectedProject').innerText = project;
+  }
+</script>
+
+</body>
+</html>
